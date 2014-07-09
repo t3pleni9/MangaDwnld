@@ -33,7 +33,7 @@ do
         cd "$url/$chapter"
         for key in $imageURLs; do 
             wget $key
-        done
+         done
         notify-send 'New Manga Download Complete' "~/$url/$chapter/" --icon=dialog-information
         chapter=`expr $chapter + 1`;
     fi
