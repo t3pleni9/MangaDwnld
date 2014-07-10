@@ -1,16 +1,17 @@
 #!/bin/bash
 clear
-if [ -f .manga_get ] 
+user=~justin
+if [ -f $user/.manga_get ] 
 then 
     echo "Starting Downloads"
 else
     echo "Error: .manga_get not found"
     exit 1
 fi
-config=($(cat ~/.manga_get))
+config=($(cat $user/.manga_get))
 len=${#config[@]}
 len=`expr $len - 1`;
-tempFile="$$.$RANDOM.tmp"
+tempFile="$user/$$.$RANDOM.tmp"
 touch $tempFile
 echo $tempFile
 
@@ -28,9 +29,9 @@ do
         echo "No file to download"        
     else     
         totChap=$(echo "$page"|grep -o  "value=\"[a-zA-Z0-9/_\.-]*/chapter/$chapter/[[:digit:]]*"|wc -l)
-        imageURLs=$(./urlGenerator.pl $linkLine $totChap)
-        mkdir -p "~/$url/$chapter"
-        cd "~/$url/$chapter"
+        imageURLs=$($user/urlGenerator.pl $linkLine $totChap)
+        mkdir -p "$user/$url/$chapter"
+        cd "$user/$url/$chapter"
         for key in $imageURLs; do 
             wget $key
         done
@@ -41,7 +42,7 @@ do
     echo $url >> $tempFile
     echo $chapter >> $tempFile
 done
-rm ".manga_get"
-mv "$tempFile" ".manga_get"
+rm "$user/.manga_get"
+mv "$tempFile" "$user/.manga_get"
 exit 1
 
