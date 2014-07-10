@@ -29,8 +29,8 @@ do
     else     
         totChap=$(echo "$page"|grep -o  "value=\"[a-zA-Z0-9/_\.-]*/chapter/$chapter/[[:digit:]]*"|wc -l)
         imageURLs=$(./urlGenerator.pl $linkLine $totChap)
-        mkdir -p "$url/$chapter"
-        cd "$url/$chapter"
+        mkdir -p "~/$url/$chapter"
+        cd "~/$url/$chapter"
         for key in $imageURLs; do 
             wget $key
         done

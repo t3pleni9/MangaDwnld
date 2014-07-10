@@ -27,8 +27,8 @@ do
     then
         echo "No file to download"        
     else 
-        mkdir -p "$url/$chapter"
-        cd "$url/$chapter"
+        mkdir -p "~/$url/$chapter"
+        cd "~/$url/$chapter"
         wget "--quiet" $linkLine "temp.zip"
         if [ -f "temp.zip" ]
         then
